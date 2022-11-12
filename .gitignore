@@ -1,32 +1,63 @@
-# Prerequisites
-*.d
-
-# Compiled Object files
-*.slo
-*.lo
-*.o
-*.obj
-
-# Precompiled Headers
-*.gch
-*.pch
-
-# Compiled Dynamic libraries
-*.so
-*.dylib
-*.dll
-
-# Fortran module files
-*.mod
-*.smod
-
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
-
-# Executables
-*.exe
-*.out
-*.app
+//Написать функцию перемножения матриц.
+#include <iostream>
+using namespace std;
+int main() {
+	setlocale(LC_ALL, "RUS");
+	int strk1 = 0;
+	int strk2 = 0;
+	int stlb1 = 0;
+	int stlb2 = 0;
+	double** a;
+	double** b;
+	double** c;
+	cout << "количество строк первой матрицы" << endl;
+	cin >> strk1;
+	cout << "количество столбцов первой матрицы" << endl;
+	cin >> stlb1;
+	cout << "количество строк второй матрицы" << endl;
+	cin >> strk2;
+	cout << "количество столбцов второй матрицы" << endl;
+	cin >> stlb2;
+	if (strk2 != stlb1) {
+		cout << "перемножение невозможно";
+		return 0;
+	}
+	a = new double* [strk1];
+	cout << "Введите значения первой матрицы " << endl;
+	for (int counter = 0; counter < strk1; counter++) {
+		a[counter] = new double[stlb1];
+		for (int counter1 = 0; counter1 < stlb1; counter1++) {
+			cout << "a = " << counter << counter1 << "\t";
+			cin >> a[counter][counter1];
+			cout << endl;
+		}
+	}
+	b = new double* [strk2];
+	cout << "Введите значения второй матрицы " << endl;
+	for (int counter = 0; counter < strk2; counter++) {
+		b[counter] = new double[stlb2];
+		for (int counter1 = 0; counter1 < stlb2; counter1++) {
+			cout << "b = " << counter << counter1 << "\t";
+			cin >> b[counter][counter1];
+			cout << endl;
+		}
+	}
+	c = new double* [strk1];
+	for (int counter = 0; counter < strk1; counter++) {
+		c[counter] = new double[stlb1];
+		for (int counter1 = 0; counter1 < stlb1; counter1++) {
+			c[counter][counter1] = 0;
+			for (int counter3 = 0; counter3 < stlb1; counter3++) { 
+				c[counter][counter1] += a[counter][counter3] * b[counter3][counter1];
+			}
+		}
+	}
+	cout << "Матрица равна" << endl;
+	for (int counter = 0; counter < strk1; counter++) {
+		for (int counter1 = 0; counter1 < stlb1; counter1++) {
+			cout << c[counter][counter1] << "\t";
+		}
+		cout << endl;
+	}
+	return 0;
+}
